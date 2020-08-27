@@ -1,12 +1,12 @@
 import React from 'react';
-import Post from './Post';
-import Suggestions from './Suggestions';
+import Post from './post';
 
 export default function Timeline() {
   return (
-    <div className="container mx-auto max-w-screen-lg grid grid-cols-6 gap-6">
+    <div className="container col-span-2">
       <Post />
-      <Suggestions />
+      <Post />
+      <Post />
     </div>
   );
 }
