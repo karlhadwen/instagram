@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function Header() {
+export default function Header({ username }) {
   return (
     <div className="post__header flex items-center align-items justify-between border-b border-gray-primary h-4 p-4 py-8">
       <div className="post__header-user flex items-center">
@@ -9,7 +9,7 @@ export default function Header() {
           src="/images/me.jpg"
           alt=""
         />
-        <p>karlhadwen</p>
+        <p>{username}</p>
       </div>
       <svg
         className="w-6"

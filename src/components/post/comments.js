@@ -10,7 +10,7 @@ export default function Comments() {
       </p>
       <p>
         <span className="mr-1 font-bold">@krsone</span>
-        <span>This picture is incredible, really shot.</span>
+        <span>This picture is incredible, really well shot.</span>
       </p>
       <p className="text-gray-base uppercase text-xs mt-2">5 hours ago</p>
     </div>

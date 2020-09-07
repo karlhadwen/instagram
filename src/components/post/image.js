@@ -1,9 +1,9 @@
 import React from 'react';
 
-export default function Image() {
+export default function Image({ src }) {
   return (
     <div className="post__img">
-      <img src="/images/1.jpg" alt="" />
+      <img src={src} alt="" />
     </div>
   );
 }
