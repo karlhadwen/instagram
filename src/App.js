@@ -2,7 +2,7 @@ import React, { useEffect, useContext } from 'react';
 import Header from './components/header';
 import Timeline from './components/timeline';
 import Sidebar from './components/sidebar';
-import { FirebaseContext } from './context/firebase';
+import { FirebaseContext } from './context';
 
 export default function App() {
   const { firebase } = useContext(FirebaseContext);

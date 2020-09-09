@@ -1,11 +1,46 @@
-import React from 'react';
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-shadow */
+import React, { useState, useContext } from 'react';
+import { useAuthListener } from '../../hooks';
+import { ActionsContext, FirebaseContext } from '../../context';
 
-export default function Actions() {
+export default function Actions({ docId, likedPhoto }) {
+  const [toggleLiked, setToggleLiked] = useState(likedPhoto);
+  const { userId } = useAuthListener();
+  const { firebase, FieldValue } = useContext(FirebaseContext);
+  const { likes, setLikes } = useContext(ActionsContext);
+
+  async function togglePhotoLiked(docId, userId, toggleLiked) {
+    return firebase
+      .firestore()
+      .collection('photos')
+      .doc(docId)
+      .update({
+        likes: toggleLiked
+          ? FieldValue.arrayRemove(userId)
+          : FieldValue.arrayUnion(userId),
+      });
+  }
+
+  const handleToggleLiked = async () => {
+    await togglePhotoLiked(docId, userId, toggleLiked);
+    setToggleLiked((toggleLiked) => !toggleLiked);
+
+    if (toggleLiked) {
+      setLikes((likes) => likes - 1);
+    } else {
+      setLikes((likes) => likes + 1);
+    }
+  };
+
   return (
     <div className="post__actions flex justify-between p-4">
       <div className="flex">
         <svg
-          className="w-8 mr-4 text-black-light"
+          onClick={() => handleToggleLiked((toggleLiked) => !toggleLiked)}
+          className={`w-8 mr-4 cursor-pointer ${
+            toggleLiked ? 'fill-red text-red-liked' : 'text-black-light'
+          }`}
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
           viewBox="0 0 24 24"
