@@ -10,20 +10,30 @@ import AddComment from './add-comment';
 
 export default function Post({ content }) {
   const [likes, setLikes] = useState(content.likes.length);
+  const [comments, setComments] = useState(content.comments);
 
   return (
     <div className="post rounded col-span-4 border bg-white border-gray-primary mb-16">
       <Header username={content.username} />
       <Image src={content.imageSrc} />
 
-      <ActionsContext.Provider value={{ likes, setLikes }}>
-        <Actions docId={content.docId} likedPhoto={content.userLikedPhoto} />
+      <ActionsContext.Provider
+        value={{
+          docId: content.docId,
+          username: content.username,
+          likes,
+          setLikes,
+          comments,
+          setComments,
+        }}
+      >
+        <Actions likedPhoto={content.userLikedPhoto} />
         <Likes />
-      </ActionsContext.Provider>
 
-      <Footer username={content.username} caption={content.caption} />
-      <Comments />
-      <AddComment />
+        <Footer caption={content.caption} />
+        <Comments />
+        <AddComment />
+      </ActionsContext.Provider>
     </div>
   );
 }

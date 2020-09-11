@@ -21,7 +21,7 @@ export function useAuthListener() {
     return () => listener();
   }, []);
 
-  return { userId: user.uid };
+  return { user };
 }
 
 export default useAuthListener;

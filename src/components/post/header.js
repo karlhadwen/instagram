@@ -9,7 +9,7 @@ export default function Header({ username }) {
           src="/images/me.jpg"
           alt=""
         />
-        <p>{username}</p>
+        <p className="font-bold">{username}</p>
       </div>
       <svg
         className="w-6"

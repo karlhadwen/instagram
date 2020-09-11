@@ -10,7 +10,7 @@ export default function Header() {
           </div>
           <div className="text-gray-700 text-center flex items-center align-items">
             <svg
-              className="w-8 mr-4 text-black-light"
+              className="w-8 mr-4 text-black-light cursor-pointer"
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
@@ -24,7 +24,7 @@ export default function Header() {
               />
             </svg>
             <svg
-              className="w-8 mr-4 text-black-light"
+              className="w-8 mr-4 text-black-light cursor-pointer"
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
@@ -38,7 +38,7 @@ export default function Header() {
               />
             </svg>
             <svg
-              className="w-8 text-black-light"
+              className="w-8 text-black-light cursor-pointer"
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"

@@ -28,12 +28,12 @@ async function getUserDetailsFromPhoto(userId) {
     .where('userId', '==', userId)
     .get();
 
-  const [{ firstName, username }] = result.docs.map((item) => ({
+  const [{ username }] = result.docs.map((item) => ({
     ...item.data(),
     docId: item.id,
   }));
 
-  return { firstName, username };
+  return { username };
 }
 
 async function getUserFollowedPhotos(userId, followingUserIds) {
@@ -54,10 +54,8 @@ async function getUserFollowedPhotos(userId, followingUserIds) {
       if (photo.likes.includes(userId)) {
         userLikedPhoto = true;
       }
-      const { username, firstName } = await getUserDetailsFromPhoto(
-        photo.userId
-      );
-      return { username, firstName, ...photo, userLikedPhoto };
+      const { username } = await getUserDetailsFromPhoto(photo.userId);
+      return { username, ...photo, userLikedPhoto };
     })
   );
 
@@ -66,7 +64,9 @@ async function getUserFollowedPhotos(userId, followingUserIds) {
 
 export function useFollowedUsersPhotos() {
   const [photos, setPhotos] = useState([]);
-  const { userId } = useAuthListener();
+  const {
+    user: { uid: userId },
+  } = useAuthListener();
 
   useEffect(() => {
     async function getTimelinePhotos() {

@@ -4,14 +4,18 @@ import React, { useState, useContext } from 'react';
 import { useAuthListener } from '../../hooks';
 import { ActionsContext, FirebaseContext } from '../../context';
 
-export default function Actions({ docId, likedPhoto }) {
+export default function Actions({ likedPhoto }) {
+  const {
+    user: { uid: userId },
+  } = useAuthListener();
   const [toggleLiked, setToggleLiked] = useState(likedPhoto);
-  const { userId } = useAuthListener();
   const { firebase, FieldValue } = useContext(FirebaseContext);
-  const { likes, setLikes } = useContext(ActionsContext);
+  const { docId, likes, setLikes } = useContext(ActionsContext);
 
-  async function togglePhotoLiked(docId, userId, toggleLiked) {
-    return firebase
+  const handleToggleLiked = async () => {
+    setToggleLiked((toggleLiked) => !toggleLiked);
+
+    await firebase
       .firestore()
       .collection('photos')
       .doc(docId)
@@ -20,17 +24,8 @@ export default function Actions({ docId, likedPhoto }) {
           ? FieldValue.arrayRemove(userId)
           : FieldValue.arrayUnion(userId),
       });
-  }
 
-  const handleToggleLiked = async () => {
-    await togglePhotoLiked(docId, userId, toggleLiked);
-    setToggleLiked((toggleLiked) => !toggleLiked);
-
-    if (toggleLiked) {
-      setLikes((likes) => likes - 1);
-    } else {
-      setLikes((likes) => likes + 1);
-    }
+    setLikes((likes) => (toggleLiked ? likes - 1 : likes + 1));
   };
 
   return (
@@ -54,7 +49,7 @@ export default function Actions({ docId, likedPhoto }) {
           />
         </svg>
         <svg
-          className="w-8 text-black-light"
+          className="w-8 text-black-light cursor-pointer"
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
           viewBox="0 0 24 24"
@@ -70,7 +65,7 @@ export default function Actions({ docId, likedPhoto }) {
       </div>
       <div>
         <svg
-          className="w-8 text-black-light"
+          className="w-8 text-black-light cursor-pointer"
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
           viewBox="0 0 24 24"

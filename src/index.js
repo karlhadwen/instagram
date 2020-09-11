@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from 'react-dom';
-import App from './App';
+import { App } from './App';
 import './styles/app.css';
 import { firebase, FieldValue } from './lib/firebase';
 import { FirebaseContext } from './context';
