@@ -6,7 +6,7 @@ export default function User() {
       <div className="user__img flex items-center justify-between col-span-1">
         <img
           className="rounded-full w-16 flex mr-3"
-          src="/images/me.jpg"
+          src="/images/avatars/karl.jpg"
           alt=""
         />
       </div>

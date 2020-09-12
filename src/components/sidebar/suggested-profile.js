@@ -6,7 +6,7 @@ export default function User() {
       <div className="suggested-user__info flex items-center justify-between">
         <img
           className="rounded-full w-8 flex mr-3"
-          src="/images/me.jpg"
+          src="/images/avatars/karl.jpg"
           alt=""
         />
         <p className="font-bold text-sm">karlhadwen</p>

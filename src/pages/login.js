@@ -28,19 +28,18 @@ export default function Login() {
         setError(error.message);
       });
   };
+
   return (
     <form onSubmit={handleSignin} method="POST">
       <input
         className="text-sm text-gray-base w-full mr-3 py-5 px-4"
         type="text"
-        name="email-address"
         placeholder="Email address"
         onChange={({ target }) => setEmailAddress(target.value)}
       />
       <input
         className="text-sm text-gray-base w-full mr-3 py-5 px-4"
         type="password"
-        name="password"
         placeholder="Password"
         onChange={({ target }) => setPassword(target.value)}
       />

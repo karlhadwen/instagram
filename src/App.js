@@ -25,7 +25,7 @@ export function App() {
         >
           <SignUp />
         </IsUserRedirect>
-        <ProtectedRoute user={user} path={ROUTES.HOME}>
+        <ProtectedRoute user={user} path={ROUTES.HOME} exact>
           <Home />
         </ProtectedRoute>
       </Switch>

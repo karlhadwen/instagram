@@ -1,6 +1,9 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { FirebaseContext } from '../context';
 
 export default function Header() {
+  const { firebase } = useContext(FirebaseContext);
+
   return (
     <header className="h-16 bg-white border-b border-gray-primary mb-8">
       <div className="container mx-auto max-w-screen-lg h-full">
@@ -51,6 +54,9 @@ export default function Header() {
                 d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
               />
             </svg>
+            <button type="button" onClick={() => firebase.auth().signOut()}>
+              Sign out
+            </button>
           </div>
         </div>
       </div>

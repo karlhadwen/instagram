@@ -13,7 +13,7 @@ export default function AddComment() {
   async function handleSubmitComment(event) {
     event.preventDefault();
 
-    setComments([...comments, { displayName, comment }]);
+    setComments([{ displayName, comment }, ...comments]);
     setComment('');
 
     return firebase
@@ -33,6 +33,7 @@ export default function AddComment() {
         method="POST"
       >
         <input
+          autoComplete="off"
           className="text-sm text-gray-base w-full mr-3 py-5 px-4"
           type="text"
           name="add-comment"

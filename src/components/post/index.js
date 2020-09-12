@@ -31,7 +31,7 @@ export default function Post({ content }) {
         <Likes />
 
         <Footer caption={content.caption} />
-        <Comments />
+        <Comments posted={content.dateCreated} />
         <AddComment />
       </ActionsContext.Provider>
     </div>

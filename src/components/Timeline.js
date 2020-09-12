@@ -7,9 +7,13 @@ export default function Timeline() {
 
   return (
     <div className="container col-span-2">
-      {photos.map((content) => (
-        <Post key={content.docId} content={content} />
-      ))}
+      {photos.length > 0 ? (
+        photos.map((content) => <Post key={content.docId} content={content} />)
+      ) : (
+        <div className="not-following">
+          <p>It looks like you're not following anybody!</p>
+        </div>
+      )}
     </div>
   );
 }
