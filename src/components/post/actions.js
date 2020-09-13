@@ -6,7 +6,7 @@ import { ActionsContext, FirebaseContext } from '../../context';
 
 export default function Actions({ likedPhoto }) {
   const {
-    user: { uid: userId },
+    user: { uid: userId = '' },
   } = useAuthListener();
   const [toggleLiked, setToggleLiked] = useState(likedPhoto);
   const { firebase, FieldValue } = useContext(FirebaseContext);

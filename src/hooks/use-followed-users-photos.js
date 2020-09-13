@@ -6,7 +6,7 @@ import { getUserFollowing, getUserFollowedPhotos } from '../services/firebase';
 export function useFollowedUsersPhotos() {
   const [photos, setPhotos] = useState([]);
   const {
-    user: { uid: userId },
+    user: { uid: userId = '' },
   } = useAuthListener();
 
   useEffect(() => {

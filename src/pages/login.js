@@ -9,43 +9,45 @@ export default function Login() {
 
   const [emailAddress, setEmailAddress] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
 
+  const [error, setError] = useState('');
   const isInvalid = password === '' || emailAddress === '';
 
-  const handleSignin = (event) => {
+  const handleLogin = async (event) => {
     event.preventDefault();
 
-    return firebase
-      .auth()
-      .signInWithEmailAndPassword(emailAddress, password)
-      .then(() => {
-        history.push(ROUTES.HOME);
-      })
-      .catch((error) => {
-        setEmailAddress('');
-        setPassword('');
-        setError(error.message);
-      });
+    try {
+      await firebase.auth().signInWithEmailAndPassword(emailAddress, password);
+    } catch (error) {
+      setEmailAddress('');
+      setPassword('');
+      setError(error.message);
+    }
+
+    history.push(ROUTES.HOME);
   };
 
   return (
-    <form onSubmit={handleSignin} method="POST">
-      <input
-        className="text-sm text-gray-base w-full mr-3 py-5 px-4"
-        type="text"
-        placeholder="Email address"
-        onChange={({ target }) => setEmailAddress(target.value)}
-      />
-      <input
-        className="text-sm text-gray-base w-full mr-3 py-5 px-4"
-        type="password"
-        placeholder="Password"
-        onChange={({ target }) => setPassword(target.value)}
-      />
-      <button disabled={isInvalid} type="submit">
-        Login
-      </button>
-    </form>
+    <div className="container">
+      {error && <p>{error}</p>}
+
+      <form onSubmit={handleLogin} method="POST">
+        <input
+          className="text-sm text-gray-base w-full mr-3 py-5 px-4"
+          type="text"
+          placeholder="Email address"
+          onChange={({ target }) => setEmailAddress(target.value)}
+        />
+        <input
+          className="text-sm text-gray-base w-full mr-3 py-5 px-4"
+          type="password"
+          placeholder="Password"
+          onChange={({ target }) => setPassword(target.value)}
+        />
+        <button disabled={isInvalid} type="submit">
+          Login
+        </button>
+      </form>
+    </div>
   );
 }
