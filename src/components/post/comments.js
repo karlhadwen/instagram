@@ -13,7 +13,7 @@ export default function Comments({ posted }) {
         </p>
       )}
       {comments.slice(0, 3).map((item) => (
-        <p>
+        <p key={`${item.comment}-${item.displayName}`}>
           <span className="mr-1 font-bold">@{item.displayName}</span>
           <span>{item.comment}</span>
         </p>

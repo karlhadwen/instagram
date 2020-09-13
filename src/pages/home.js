@@ -5,7 +5,7 @@ import Sidebar from '../components/sidebar';
 
 export default function Home() {
   useEffect(() => {
-    document.title = `Instagram`;
+    document.title = 'Instagram';
   }, []);
 
   return (
