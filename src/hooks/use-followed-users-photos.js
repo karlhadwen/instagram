@@ -20,6 +20,7 @@ export function useFollowedUsersPhotos() {
         );
       }
 
+      followedUsersPhotos.sort((a, b) => b.dateCreated - a.dateCreated);
       setPhotos(followedUsersPhotos);
     }
 

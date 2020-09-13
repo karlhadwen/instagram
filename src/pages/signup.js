@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import { FirebaseContext } from '../context';
 import * as ROUTES from '../constants/routes';
@@ -49,6 +49,10 @@ export default function SignUp() {
       setError('That username is already taken, please try another.');
     }
   };
+
+  useEffect(() => {
+    document.title = `Sign Up - Instagram`;
+  }, []);
 
   return (
     <div className="container">

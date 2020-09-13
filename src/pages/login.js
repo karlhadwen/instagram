@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import { FirebaseContext } from '../context';
 import * as ROUTES from '../constants/routes';
@@ -26,6 +26,10 @@ export default function Login() {
 
     history.push(ROUTES.HOME);
   };
+
+  useEffect(() => {
+    document.title = `Login - Instagram`;
+  }, []);
 
   return (
     <div className="container">
