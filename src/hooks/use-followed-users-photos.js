@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { useAuthListener } from './use-auth-listener';
 import { getUserFollowing, getUserFollowedPhotos } from '../services/firebase';
 
-// TODO: make sure that the final array comes back ordered by time (posts)
 export function useFollowedUsersPhotos() {
   const [photos, setPhotos] = useState([]);
   const {

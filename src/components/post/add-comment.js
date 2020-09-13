@@ -10,7 +10,7 @@ export default function AddComment() {
     user: { displayName },
   } = useAuthListener();
 
-  async function handleSubmitComment(event) {
+  function handleSubmitComment(event) {
     event.preventDefault();
 
     setComments([{ displayName, comment }, ...comments]);

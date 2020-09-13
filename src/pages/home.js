@@ -1,19 +1,9 @@
-import React, { useEffect, useContext } from 'react';
+import React from 'react';
 import Header from '../components/header';
 import Timeline from '../components/timeline';
 import Sidebar from '../components/sidebar';
-import { FirebaseContext } from '../context';
 
 export default function Home() {
-  const { firebase } = useContext(FirebaseContext);
-
-  useEffect(() => {
-    firebase
-      .auth()
-      .signInWithEmailAndPassword('karlhadwen@gmail.com', 'test123')
-      .then(() => {});
-  }, []);
-
   return (
     <div className="app bg-gray-background">
       <Header />

@@ -19,9 +19,9 @@ export function seedDatabase(firebase) {
     },
     {
       userId: '3',
-      username: 'marshal',
-      firstName: 'Marshal',
-      emailAddress: 'marshal@mathers.com',
+      username: 'dali',
+      firstName: 'Salvador',
+      emailAddress: 'salvador@dali.com',
       following: ['bmjpkU8bBWRse2JwKgzOGTv5tUI3'],
       dateCreated: Date.now(),
     },
