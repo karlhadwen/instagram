@@ -1,14 +1,14 @@
 import React, { useContext } from 'react';
 import { FirebaseContext } from '../../context';
 import { useAuthListener } from '../../hooks';
-import { getUser } from '../../services/firebase';
+import { getUserByUserId } from '../../services/firebase';
 
 export default function SuggestedProfile({ username, profileId, forceUpdate }) {
   const { firebase, FieldValue } = useContext(FirebaseContext);
   const { user } = useAuthListener();
 
   async function handleFollowUser() {
-    const [{ docId }] = await getUser(user.uid);
+    const [{ docId }] = await getUserByUserId(user.uid);
     forceUpdate();
 
     return firebase

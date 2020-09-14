@@ -13,7 +13,6 @@ export default function Suggestions() {
       const response = await getSuggestedProfiles(user.uid);
       setProfiles(response);
     }
-
     suggestedProfiles();
   }, [updated]);
 

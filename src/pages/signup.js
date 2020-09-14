@@ -9,7 +9,7 @@ export default function SignUp() {
   const { firebase } = useContext(FirebaseContext);
 
   const [username, setUsername] = useState('');
-  const [firstName, setFirstName] = useState('');
+  const [fullName, setFullName] = useState('');
   const [emailAddress, setEmailAddress] = useState('');
   const [password, setPassword] = useState('');
 
@@ -32,7 +32,7 @@ export default function SignUp() {
         await firebase.firestore().collection('users').add({
           userId: createdUserResult.user.uid,
           username: username.toLowerCase(),
-          firstName: firstName.toLowerCase(),
+          fullName: fullName.toLowerCase(),
           emailAddress: emailAddress.toLowerCase(),
           following: [],
           dateCreated: Date.now(),
@@ -40,7 +40,7 @@ export default function SignUp() {
 
         history.push(ROUTES.HOME);
       } catch (error) {
-        setFirstName('');
+        setFullName('');
         setEmailAddress('');
         setPassword('');
         setError(error.message);
@@ -69,9 +69,9 @@ export default function SignUp() {
         <input
           className="text-sm text-gray-base w-full mr-3 py-5 px-4"
           type="text"
-          placeholder="First name"
-          value={firstName}
-          onChange={({ target }) => setFirstName(target.value)}
+          placeholder="Full name"
+          value={fullName}
+          onChange={({ target }) => setFullName(target.value)}
         />
         <input
           className="text-sm text-gray-base w-full mr-3 py-5 px-4"
