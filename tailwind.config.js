@@ -4,7 +4,7 @@ module.exports = {
   },
   theme: {
     fill: (theme) => ({
-      red: theme('colors.red.liked'),
+      red: theme('colors.red.primary'),
     }),
     colors: {
       white: '#ffffff',
@@ -13,6 +13,7 @@ module.exports = {
       },
       black: {
         light: '#262626',
+        faded: '#00000059',
       },
       gray: {
         base: '#8e8e8e',
@@ -20,8 +21,11 @@ module.exports = {
         primary: '#dbdbdb',
       },
       red: {
-        liked: '#ed4956',
+        primary: '#ed4956',
       },
     },
+  },
+  variants: {
+    display: ['group-hover'],
   },
 };

@@ -34,7 +34,7 @@ export default function Actions({ likedPhoto }) {
         <svg
           onClick={() => handleToggleLiked((toggleLiked) => !toggleLiked)}
           className={`w-8 mr-4 cursor-pointer ${
-            toggleLiked ? 'fill-red text-red-liked' : 'text-black-light'
+            toggleLiked ? 'fill-red text-red-primary' : 'text-black-light'
           }`}
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
