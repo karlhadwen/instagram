@@ -32,7 +32,7 @@ export default function SignUp() {
         await firebase.firestore().collection('users').add({
           userId: createdUserResult.user.uid,
           username: username.toLowerCase(),
-          fullName: fullName.toLowerCase(),
+          fullName,
           emailAddress: emailAddress.toLowerCase(),
           following: [],
           dateCreated: Date.now(),

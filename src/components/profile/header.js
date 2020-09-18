@@ -23,7 +23,7 @@ export default function Header({
         </div>
         <div className="container flex mt-4">
           <p className="mr-10">
-            <span className="font-bold">62</span> posts
+            <span className="font-bold">62</span> photos
           </p>
           <p className="mr-10">
             <span className="font-bold">{followersCount}</span> followers
