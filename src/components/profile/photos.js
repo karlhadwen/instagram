@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 import React from 'react';
 import Skeleton from 'react-loading-skeleton';
 
@@ -5,7 +6,13 @@ export default function Photos({ photos }) {
   return (
     <div className="h-16 border-t border-gray-primary mt-12 pt-4">
       <div className="grid grid-cols-3 gap-8 mt-4">
-        {photos.length > 0 ? (
+        {!photos ? (
+          <>
+            {[...new Array(9)].map((_, index) => (
+              <Skeleton key={index} count={1} width={320} height={400} />
+            ))}
+          </>
+        ) : photos.length > 0 ? (
           photos.map((photo) => (
             <div key={photo.docId} className="relative group cursor-pointer">
               <img src={photo.imageSrc} alt={photo.caption} />
@@ -45,14 +52,13 @@ export default function Photos({ photos }) {
               </div>
             </div>
           ))
-        ) : (
-          <>
-            {[...new Array(9)].map(() => (
-              <Skeleton count={1} width={320} height={400} />
-            ))}
-          </>
-        )}
+        ) : null}
       </div>
+
+      {!photos ||
+        (photos.length === 0 && (
+          <p className="text-center text-2xl">No Posts Yet</p>
+        ))}
     </div>
   );
 }

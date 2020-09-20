@@ -1,23 +1,24 @@
-import React, { useContext } from 'react';
-import { FirebaseContext } from '../../context';
+import React from 'react';
 import { useAuthListener } from '../../hooks';
-import { getUserByUserId } from '../../services/firebase';
+import {
+  getUserByUserId,
+  updateUserFollowing,
+  updateFollowedUserFollowers,
+} from '../../services/firebase';
 
-export default function SuggestedProfile({ username, profileId, forceUpdate }) {
-  const { firebase, FieldValue } = useContext(FirebaseContext);
+export default function SuggestedProfile({
+  userDocId,
+  username,
+  profileId,
+  forceUpdate,
+}) {
   const { user } = useAuthListener();
 
   async function handleFollowUser() {
     const [{ docId }] = await getUserByUserId(user.uid);
+    await updateUserFollowing(docId, profileId);
+    await updateFollowedUserFollowers(userDocId, profileId);
     forceUpdate();
-
-    return firebase
-      .firestore()
-      .collection('users')
-      .doc(docId)
-      .update({
-        following: FieldValue.arrayUnion(profileId),
-      });
   }
 
   return (
