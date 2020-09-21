@@ -20,7 +20,7 @@ export default function Profile() {
       }
     }
     checkUserExistsToLoadProfile();
-  }, []);
+  }, [username]);
 
   return userExists ? (
     <div className="app bg-gray-background">

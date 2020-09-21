@@ -8,7 +8,7 @@ import {
 
 export default function Profile({ username }) {
   const [profile, setProfile] = useState({});
-  const [photosCollection, setPhotosCollection] = useState(null);
+  const [photosCollection, setPhotosCollection] = useState();
   const [followerCount, setFollowerCount] = useState(0);
 
   useEffect(() => {
@@ -21,7 +21,7 @@ export default function Profile({ username }) {
       setFollowerCount(user.followers.length);
     }
     getProfileInfoAndPhotos();
-  }, []);
+  }, [username]);
 
   return (
     <>
