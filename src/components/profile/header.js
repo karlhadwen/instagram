@@ -10,7 +10,7 @@ export default function Header({
   setFollowerCount,
   profile: { docId: profileDocId, userId, fullName, following },
 }) {
-  const { user: usernameFromUrl } = useParams();
+  const { username: usernameFromUrl } = useParams();
   const { user } = useUser();
   const [isFollowingProfile, setIsFollowingProfile] = useState(undefined);
   const activeBtnFollowState =

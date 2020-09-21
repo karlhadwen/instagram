@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { useAuthListener } from '../../hooks';
 import {
   getUserByUserId,
@@ -29,7 +30,9 @@ export default function SuggestedProfile({
           src={`/images/avatars/${username}.jpg`}
           alt=""
         />
-        <p className="font-bold text-sm">{username}</p>
+        <Link to={`/p/${username}`}>
+          <p className="font-bold text-sm">{username}</p>
+        </Link>
       </div>
       <div className="suggested-user__follow">
         <button
