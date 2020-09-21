@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { ProtectedRoute } from './helpers/routes';
-import { Home, Login, SignUp, Profile, Explore } from './pages';
+import { Home, Login, SignUp, Profile } from './pages';
 import * as ROUTES from './constants/routes';
 import { useAuthListener } from './hooks';
 
@@ -19,9 +19,6 @@ export function App() {
         </Route>
         <Route path={ROUTES.PROFILE}>
           <Profile />
-        </Route>
-        <Route path={ROUTES.EXPLORE}>
-          <Explore />
         </Route>
         <ProtectedRoute user={user} path={ROUTES.HOME} exact>
           <Home />

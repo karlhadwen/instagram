@@ -3,7 +3,7 @@ import { useAuthListener } from './use-auth-listener';
 import { getUserFollowing, getUserFollowedPhotos } from '../services/firebase';
 
 export function useFollowedUsersPhotos() {
-  const [photos, setPhotos] = useState([]);
+  const [photos, setPhotos] = useState(null);
   const {
     user: { uid: userId = '' },
   } = useAuthListener();
