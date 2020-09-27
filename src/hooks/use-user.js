@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
-import { useAuthListener } from './use-auth-listener';
 import { getUserByUserId } from '../services/firebase';
+import useAuthListener from './use-auth-listener';
 
-export function useUser() {
+export default function useUser() {
   const [activeUser, setActiveUser] = useState({});
   const { user } = useAuthListener();
 
@@ -14,9 +14,7 @@ export function useUser() {
     if (user?.uid) {
       suggestedProfiles();
     }
-  }, [user?.uid]);
+  }, [user]);
 
   return { user: activeUser };
 }
-
-export default useUser;

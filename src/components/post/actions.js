@@ -1,9 +1,9 @@
 /* eslint-disable no-shadow */
 import React, { useState, useContext } from 'react';
-import { useAuthListener } from '../../hooks';
-import { FirebaseContext } from '../../context';
+import FirebaseContext from '../../context/firebase';
+import useAuthListener from '../../hooks/use-auth-listener';
 
-export default function Actions({ docId, totalLikes, likedPhoto }) {
+export function Actions({ docId, totalLikes, likedPhoto }) {
   const {
     user: { uid: userId = '' },
   } = useAuthListener();
@@ -29,11 +29,11 @@ export default function Actions({ docId, totalLikes, likedPhoto }) {
 
   return (
     <>
-      <div className="post__actions flex justify-between p-4">
+      <div className="flex justify-between p-4">
         <div className="flex">
           <svg
             onClick={() => handleToggleLiked((toggleLiked) => !toggleLiked)}
-            className={`w-8 mr-4 cursor-pointer ${
+            className={`w-8 mr-4 select-none cursor-pointer ${
               toggleLiked ? 'fill-red text-red-primary' : 'text-black-light'
             }`}
             xmlns="http://www.w3.org/2000/svg"
@@ -49,7 +49,7 @@ export default function Actions({ docId, totalLikes, likedPhoto }) {
             />
           </svg>
           <svg
-            className="w-8 text-black-light cursor-pointer"
+            className="w-8 text-black-light select-none cursor-pointer"
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
@@ -72,3 +72,5 @@ export default function Actions({ docId, totalLikes, likedPhoto }) {
     </>
   );
 }
+
+export default Actions;

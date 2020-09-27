@@ -1,10 +1,10 @@
 import React from 'react';
-import { render } from 'react-dom';
+import ReactDOM from 'react-dom';
 import whyDidYouRender from '@welldone-software/why-did-you-render';
-import { App } from './App';
 import './styles/app.css';
+import App from './App';
 import { firebase, FieldValue } from './lib/firebase';
-import { FirebaseContext } from './context';
+import FirebaseContext from './context/firebase';
 
 whyDidYouRender(React, {
   onlyLogs: true,
@@ -13,7 +13,7 @@ whyDidYouRender(React, {
   trackAllPureComponents: true,
 });
 
-render(
+ReactDOM.render(
   <FirebaseContext.Provider value={{ firebase, FieldValue }}>
     <App />
   </FirebaseContext.Provider>,

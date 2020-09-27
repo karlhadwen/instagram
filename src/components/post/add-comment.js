@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
-import { FirebaseContext } from '../../context';
-import { useAuthListener } from '../../hooks';
+import FirebaseContext from '../../context/firebase';
+import useAuthListener from '../../hooks/use-auth-listener';
 
 export default function AddComment({ docId, comments, setComments }) {
   const [comment, setComment] = useState('');

@@ -1,10 +1,11 @@
-import React, { useState, useEffect, useReducer } from 'react';
+/* eslint-disable no-nested-ternary */
+import React, { memo, useState, useEffect } from 'react';
+import Skeleton from 'react-loading-skeleton';
 import SuggestedProfile from './suggested-profile';
 import { getSuggestedProfiles } from '../../services/firebase';
 
-export default function Suggestions({ userId }) {
-  const [profiles, setProfiles] = useState([]);
-  const [updated, forceUpdate] = useReducer((x) => x + 1, 0);
+const Suggestions = ({ userId }) => {
+  const [profiles, setProfiles] = useState(null);
 
   useEffect(() => {
     async function suggestedProfiles() {
@@ -12,9 +13,11 @@ export default function Suggestions({ userId }) {
       setProfiles(response);
     }
     suggestedProfiles();
-  }, [updated]);
+  }, [userId]);
 
-  return profiles.length > 0 ? (
+  return !profiles ? (
+    <Skeleton count={1} height={150} className="mt-5" />
+  ) : profiles.length > 0 ? (
     <div className="suggestions rounded flex flex-col">
       <div className="text-sm suggestions__header flex items-center align-items justify-between mb-2">
         <p className="font-bold text-gray-base">Suggestions for you</p>
@@ -27,10 +30,11 @@ export default function Suggestions({ userId }) {
             username={profile.username}
             profileId={profile.userId}
             userId={userId}
-            forceUpdate={forceUpdate}
           />
         ))}
       </div>
     </div>
   ) : null;
-}
+};
+
+export default memo(Suggestions);

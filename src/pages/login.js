@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useHistory, Link } from 'react-router-dom';
-import { FirebaseContext } from '../context';
+import FirebaseContext from '../context/firebase';
 import * as ROUTES from '../constants/routes';
 
 export default function Login() {
@@ -13,7 +13,7 @@ export default function Login() {
   const [error, setError] = useState('');
   const isInvalid = password === '' || emailAddress === '';
 
-  async function handleLogin(event) {
+  const handleLogin = async (event) => {
     event.preventDefault();
 
     try {
@@ -24,7 +24,7 @@ export default function Login() {
       setPassword('');
       setError(error.message);
     }
-  }
+  };
 
   useEffect(() => {
     document.title = 'Login - Instagram';

@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
   getUserByUserId,
@@ -6,21 +6,18 @@ import {
   updateFollowedUserFollowers,
 } from '../../services/firebase';
 
-const SuggestedProfile = ({
-  userDocId,
-  username,
-  profileId,
-  userId,
-  forceUpdate,
-}) => {
+const SuggestedProfile = ({ userDocId, username, profileId, userId }) => {
+  const [followed, setFollowed] = useState(false);
+
   async function handleFollowUser() {
+    setFollowed(true);
+
     const [{ docId }] = await getUserByUserId(userId);
     await updateUserFollowing(docId, profileId, false);
-    await updateFollowedUserFollowers(userDocId, profileId);
-    forceUpdate();
+    await updateFollowedUserFollowers(userDocId, userId, false);
   }
 
-  return (
+  return !followed ? (
     <div className="suggested-user flex flex-row items-center align-items justify-between">
       <div className="suggested-user__info flex items-center justify-between">
         <img
@@ -42,7 +39,7 @@ const SuggestedProfile = ({
         </button>
       </div>
     </div>
-  );
+  ) : null;
 };
 
-export default memo(SuggestedProfile);
+export default SuggestedProfile;

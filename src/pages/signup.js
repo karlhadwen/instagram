@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useHistory, Link } from 'react-router-dom';
-import { FirebaseContext } from '../context';
+import FirebaseContext from '../context/firebase';
 import * as ROUTES from '../constants/routes';
 import { doesUsernameExist } from '../services/firebase';
 
@@ -16,7 +16,7 @@ export default function SignUp() {
   const [error, setError] = useState('');
   const isInvalid = password === '' || emailAddress === '';
 
-  async function handleSignUp(event) {
+  const handleSignUp = async (event) => {
     event.preventDefault();
 
     if ((await doesUsernameExist(username)) === false) {
@@ -48,7 +48,7 @@ export default function SignUp() {
     } else {
       setError('That username is already taken, please try another.');
     }
-  }
+  };
 
   useEffect(() => {
     document.title = 'Sign Up - Instagram';

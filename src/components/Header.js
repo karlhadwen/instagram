@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
-import { FirebaseContext } from '../context';
-import { useAuthListener } from '../hooks';
+import FirebaseContext from '../context/firebase';
+import useAuthListener from '../hooks/use-auth-listener';
 import * as ROUTES from '../constants/routes';
 
 export default function Header() {

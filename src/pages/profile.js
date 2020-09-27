@@ -7,8 +7,8 @@ import * as ROUTES from '../constants/routes';
 
 export default function Profile() {
   const { username } = useParams();
-  const history = useHistory();
   const [userExists, setUserExists] = useState(undefined);
+  const history = useHistory();
 
   useEffect(() => {
     async function checkUserExistsToLoadProfile() {
@@ -20,7 +20,7 @@ export default function Profile() {
       }
     }
     checkUserExistsToLoadProfile();
-  }, [username]);
+  }, [username, history]);
 
   return userExists ? (
     <div className="app bg-gray-background">

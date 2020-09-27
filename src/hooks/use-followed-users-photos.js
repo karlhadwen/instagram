@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
-import { useAuthListener } from './use-auth-listener';
 import { getUserFollowing, getUserFollowedPhotos } from '../services/firebase';
+import useAuthListener from './use-auth-listener';
 
-export function useFollowedUsersPhotos() {
+export default function useFollowedUsersPhotos() {
   const [photos, setPhotos] = useState(null);
   const {
     user: { uid: userId = '' },
@@ -24,9 +24,7 @@ export function useFollowedUsersPhotos() {
       setPhotos(followedUsersPhotos);
     }
     getTimelinePhotos();
-  }, []);
+  }, [userId]);
 
   return { photos };
 }
-
-export default useFollowedUsersPhotos;
