@@ -1,13 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { useAuthListener } from '../../hooks';
 
-export default function User() {
-  const { user } = useAuthListener();
-
+export default function User({ username }) {
   return (
     <Link
-      to={`/p/${user.displayName}`}
+      to={`/p/${username}`}
       className="grid grid-cols-4 gap-4 mb-6 items-center"
     >
       <div className="user__img flex items-center justify-between col-span-1">

@@ -1,16 +1,14 @@
 import React, { useState, useEffect, useReducer } from 'react';
 import SuggestedProfile from './suggested-profile';
-import { useAuthListener } from '../../hooks';
 import { getSuggestedProfiles } from '../../services/firebase';
 
-export default function Suggestions() {
-  const { user } = useAuthListener();
+export default function Suggestions({ userId }) {
   const [profiles, setProfiles] = useState([]);
   const [updated, forceUpdate] = useReducer((x) => x + 1, 0);
 
   useEffect(() => {
     async function suggestedProfiles() {
-      const response = await getSuggestedProfiles(user.uid);
+      const response = await getSuggestedProfiles(userId);
       setProfiles(response);
     }
     suggestedProfiles();
@@ -28,6 +26,7 @@ export default function Suggestions() {
             userDocId={profile.docId}
             username={profile.username}
             profileId={profile.userId}
+            userId={userId}
             forceUpdate={forceUpdate}
           />
         ))}

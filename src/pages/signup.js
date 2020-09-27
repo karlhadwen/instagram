@@ -16,7 +16,7 @@ export default function SignUp() {
   const [error, setError] = useState('');
   const isInvalid = password === '' || emailAddress === '';
 
-  const handleSignUp = async (event) => {
+  async function handleSignUp(event) {
     event.preventDefault();
 
     if ((await doesUsernameExist(username)) === false) {
@@ -48,7 +48,7 @@ export default function SignUp() {
     } else {
       setError('That username is already taken, please try another.');
     }
-  };
+  }
 
   useEffect(() => {
     document.title = 'Sign Up - Instagram';

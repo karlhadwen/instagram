@@ -5,7 +5,7 @@ import Post from './post';
 import { useFollowedUsersPhotos } from '../hooks';
 
 export default function Timeline() {
-  const photos = useFollowedUsersPhotos();
+  const { photos } = useFollowedUsersPhotos();
 
   return (
     <div className="container col-span-2">

@@ -1,23 +1,21 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { Link } from 'react-router-dom';
-import { useAuthListener } from '../../hooks';
 import {
   getUserByUserId,
   updateUserFollowing,
   updateFollowedUserFollowers,
 } from '../../services/firebase';
 
-export default function SuggestedProfile({
+const SuggestedProfile = ({
   userDocId,
   username,
   profileId,
+  userId,
   forceUpdate,
-}) {
-  const { user } = useAuthListener();
-
+}) => {
   async function handleFollowUser() {
-    const [{ docId }] = await getUserByUserId(user.uid);
-    await updateUserFollowing(docId, profileId);
+    const [{ docId }] = await getUserByUserId(userId);
+    await updateUserFollowing(docId, profileId, false);
     await updateFollowedUserFollowers(userDocId, profileId);
     forceUpdate();
   }
@@ -45,4 +43,6 @@ export default function SuggestedProfile({
       </div>
     </div>
   );
-}
+};
+
+export default memo(SuggestedProfile);

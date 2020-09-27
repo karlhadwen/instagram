@@ -16,10 +16,9 @@ export default function Header({
   const activeBtnFollowState =
     user.username &&
     user.username !== usernameFromUrl &&
-    user.username !== undefined &&
     isFollowingProfile !== undefined;
 
-  const handleToggleFollow = async () => {
+  async function handleToggleFollow() {
     // eslint-disable-next-line no-shadow
     setIsFollowingProfile((isFollowingProfile) => !isFollowingProfile);
     setFollowerCount(isFollowingProfile ? followers - 1 : followers + 1);
@@ -31,7 +30,7 @@ export default function Header({
       userId,
       user.userId
     );
-  };
+  }
 
   useEffect(() => {
     async function isLoggedInUserFollowingProfile() {

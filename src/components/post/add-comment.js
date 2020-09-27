@@ -1,10 +1,9 @@
 import React, { useState, useContext } from 'react';
-import { ActionsContext, FirebaseContext } from '../../context';
+import { FirebaseContext } from '../../context';
 import { useAuthListener } from '../../hooks';
 
-export default function AddComment() {
+export default function AddComment({ docId, comments, setComments }) {
   const [comment, setComment] = useState('');
-  const { docId, comments, setComments } = useContext(ActionsContext);
   const { firebase, FieldValue } = useContext(FirebaseContext);
   const {
     user: { displayName },
