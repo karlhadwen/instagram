@@ -3,7 +3,12 @@ import React, { useState, useContext } from 'react';
 import FirebaseContext from '../../context/firebase';
 import useAuthListener from '../../hooks/use-auth-listener';
 
-export function Actions({ docId, totalLikes, likedPhoto }) {
+export default function Actions({
+  docId,
+  totalLikes,
+  likedPhoto,
+  handleFocus,
+}) {
   const {
     user: { uid: userId = '' },
   } = useAuthListener();
@@ -33,6 +38,11 @@ export function Actions({ docId, totalLikes, likedPhoto }) {
         <div className="flex">
           <svg
             onClick={() => handleToggleLiked((toggleLiked) => !toggleLiked)}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter') {
+                handleToggleLiked((toggleLiked) => !toggleLiked);
+              }
+            }}
             className={`w-8 mr-4 select-none cursor-pointer ${
               toggleLiked ? 'fill-red text-red-primary' : 'text-black-light'
             }`}
@@ -40,6 +50,7 @@ export function Actions({ docId, totalLikes, likedPhoto }) {
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
+            tabIndex={0}
           >
             <path
               strokeLinecap="round"
@@ -49,11 +60,18 @@ export function Actions({ docId, totalLikes, likedPhoto }) {
             />
           </svg>
           <svg
+            onClick={handleFocus}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter') {
+                handleFocus();
+              }
+            }}
             className="w-8 text-black-light select-none cursor-pointer"
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
+            tabIndex={0}
           >
             <path
               strokeLinecap="round"
@@ -72,5 +90,3 @@ export function Actions({ docId, totalLikes, likedPhoto }) {
     </>
   );
 }
-
-export default Actions;

@@ -9,14 +9,14 @@ module.exports = {
     colors: {
       white: '#ffffff',
       blue: {
-        medium: '#0095f6',
+        medium: '#005c98',
       },
       black: {
         light: '#262626',
         faded: '#00000059',
       },
       gray: {
-        base: '#8e8e8e',
+        base: '#616161',
         background: '#fafafa',
         primary: '#dbdbdb',
       },

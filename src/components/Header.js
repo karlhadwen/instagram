@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/img-redundant-alt */
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import FirebaseContext from '../context/firebase';
@@ -13,7 +14,7 @@ export default function Header() {
       <div className="container mx-auto max-w-screen-lg h-full">
         <div className="flex justify-between h-full">
           <div className="text-gray-700 text-center flex items-center align-items cursor-pointer">
-            <Link to="/">
+            <Link to={ROUTES.HOME} aria-label="Home">
               <img
                 src="/images/logo.png"
                 alt="Instagram"
@@ -24,7 +25,7 @@ export default function Header() {
           <div className="text-gray-700 text-center flex items-center align-items">
             {user ? (
               <>
-                <Link to={ROUTES.HOME}>
+                <Link to={ROUTES.HOME} aria-label="Home">
                   <svg
                     className="w-8 mr-6 text-black-light cursor-pointer"
                     xmlns="http://www.w3.org/2000/svg"
@@ -41,7 +42,11 @@ export default function Header() {
                   </svg>
                 </Link>
 
-                <button type="button" onClick={() => firebase.auth().signOut()}>
+                <button
+                  type="button"
+                  title="Sign Out"
+                  onClick={() => firebase.auth().signOut()}
+                >
                   <svg
                     className="w-8 mr-6 text-black-light cursor-pointer"
                     xmlns="http://www.w3.org/2000/svg"
@@ -62,7 +67,7 @@ export default function Header() {
                     <img
                       className="rounded-full h-8 w-8 flex"
                       src={`/images/avatars/${user.displayName}.jpg`}
-                      alt=""
+                      alt={`${user.displayName} profile picture`}
                     />
                   </Link>
                 </div>

@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/img-redundant-alt */
 import React from 'react';
 import { Link } from 'react-router-dom';
 
@@ -9,7 +10,7 @@ export default function Header({ username }) {
           <img
             className="rounded-full h-8 w-8 flex mr-3"
             src={`/images/avatars/${username}.jpg`}
-            alt=""
+            alt={`${username} profile picture`}
           />
           <p className="font-bold">{username}</p>
         </Link>

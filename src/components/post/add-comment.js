@@ -2,12 +2,14 @@ import React, { useState, useContext } from 'react';
 import FirebaseContext from '../../context/firebase';
 import useAuthListener from '../../hooks/use-auth-listener';
 
-export default function AddComment({ docId, comments, setComments }) {
+export default function AddComment({ docId, comments, setComments, commentInput }) {
   const [comment, setComment] = useState('');
   const { firebase, FieldValue } = useContext(FirebaseContext);
   const {
     user: { displayName },
   } = useAuthListener();
+
+  console.log('comment', comment);
 
   function handleSubmitComment(event) {
     event.preventDefault();
@@ -28,10 +30,11 @@ export default function AddComment({ docId, comments, setComments }) {
     <div className="post__add-comment border-t border-gray-primary">
       <form
         className="flex w-full justify-between pl-0 pr-5"
-        onSubmit={handleSubmitComment}
+        onSubmit={(event) => (comment.length > 1 ? handleSubmitComment(event) : event.preventDefault())}
         method="POST"
       >
         <input
+          aria-label="Add a comment"
           autoComplete="off"
           className="text-sm text-gray-base w-full mr-3 py-5 px-4"
           type="text"
@@ -39,13 +42,12 @@ export default function AddComment({ docId, comments, setComments }) {
           placeholder="Add a comment..."
           value={comment}
           onChange={({ target }) => setComment(target.value)}
+          ref={commentInput}
         />
         <button
-          className={`text-sm font-bold text-blue-medium ${
-            !comment && 'opacity-25'
-          }`}
+          className={`text-sm font-bold text-blue-medium ${!comment && 'opacity-25'}`}
           type="button"
-          disabled={!comment}
+          disabled={comment.length < 1}
           onClick={handleSubmitComment}
         >
           Post

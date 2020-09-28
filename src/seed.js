@@ -57,7 +57,7 @@ export function seedDatabase(firebase) {
         likes: [],
         comments: [
           {
-            displayName: 'marshal',
+            displayName: 'dali',
             comment: 'Love this place, looks like my animal farm!',
           },
           {
