@@ -8,7 +8,7 @@ export function seedDatabase(firebase) {
       emailAddress: 'karlhadwen@gmail.com',
       following: ['2'],
       followers: ['2', '3', '4'],
-      dateCreated: Date.now(),
+      dateCreated: Date.now()
     },
     {
       userId: '2',
@@ -17,7 +17,7 @@ export function seedDatabase(firebase) {
       emailAddress: 'raphael@sanzio.com',
       following: [],
       followers: ['bmjpkU8bBWRse2JwKgzOGTv5tUI3'],
-      dateCreated: Date.now(),
+      dateCreated: Date.now()
     },
     {
       userId: '3',
@@ -26,7 +26,7 @@ export function seedDatabase(firebase) {
       emailAddress: 'salvador@dali.com',
       following: [],
       followers: ['bmjpkU8bBWRse2JwKgzOGTv5tUI3'],
-      dateCreated: Date.now(),
+      dateCreated: Date.now()
     },
     {
       userId: '4',
@@ -35,8 +35,8 @@ export function seedDatabase(firebase) {
       emailAddress: 'george@orwell.com',
       following: [],
       followers: ['bmjpkU8bBWRse2JwKgzOGTv5tUI3'],
-      dateCreated: Date.now(),
-    },
+      dateCreated: Date.now()
+    }
   ];
 
   // eslint-disable-next-line prefer-const
@@ -58,16 +58,16 @@ export function seedDatabase(firebase) {
         comments: [
           {
             displayName: 'dali',
-            comment: 'Love this place, looks like my animal farm!',
+            comment: 'Love this place, looks like my animal farm!'
           },
           {
             displayName: 'orwell',
-            comment: 'Would you mind if I used this picture?',
-          },
+            comment: 'Would you mind if I used this picture?'
+          }
         ],
         userLatitude: '40.7128°',
         userLongitude: '74.0060°',
-        dateCreated: Date.now(),
+        dateCreated: Date.now()
       });
   }
 }

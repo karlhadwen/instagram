@@ -1,14 +1,14 @@
 import React, { useState, useContext } from 'react';
 import PropTypes from 'prop-types';
 import FirebaseContext from '../../context/firebase';
-import useAuthListener from '../../hooks/use-auth-listener';
+import UserContext from '../../context/user';
 
 export default function AddComment({ docId, comments, setComments, commentInput }) {
   const [comment, setComment] = useState('');
   const { firebase, FieldValue } = useContext(FirebaseContext);
   const {
     user: { displayName }
-  } = useAuthListener();
+  } = useContext(UserContext);
 
   function handleSubmitComment(event) {
     event.preventDefault();

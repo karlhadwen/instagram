@@ -4,14 +4,17 @@ import Header from './header';
 import Photos from './photos';
 import { getUserByUsername, getUserPhotosByUsername } from '../../services/firebase';
 
+const reducer = (state, newState) => ({ ...state, ...newState });
+const initialState = {
+  profile: {},
+  photosCollection: [],
+  followerCount: 0
+};
+
 export default function Profile({ username }) {
   const [{ profile, photosCollection, followerCount }, dispatch] = useReducer(
-    (state, newState) => ({ ...state, ...newState }),
-    {
-      profile: {},
-      photosCollection: [],
-      followerCount: 0
-    }
+    reducer,
+    initialState
   );
 
   useEffect(() => {

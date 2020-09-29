@@ -2,12 +2,12 @@
 import React, { useState, useContext } from 'react';
 import PropTypes from 'prop-types';
 import FirebaseContext from '../../context/firebase';
-import useAuthListener from '../../hooks/use-auth-listener';
+import UserContext from '../../context/user';
 
 export default function Actions({ docId, totalLikes, likedPhoto, handleFocus }) {
   const {
     user: { uid: userId = '' }
-  } = useAuthListener();
+  } = useContext(UserContext);
   const [toggleLiked, setToggleLiked] = useState(likedPhoto);
   const [likes, setLikes] = useState(totalLikes);
   const { firebase, FieldValue } = useContext(FirebaseContext);

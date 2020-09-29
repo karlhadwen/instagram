@@ -58,7 +58,9 @@ export default function SignUp() {
     <div className="container flex mx-auto max-w-xs items-center h-screen">
       <div className="flex flex-col">
         <div className="flex flex-col items-center bg-white p-4 border border-gray-primary mb-4">
-          <img src="/images/logo.png" alt="Instagram" className="mt-2 w-6/12 mb-4" />
+          <h1 className="flex justify-center w-full">
+            <img src="/images/logo.png" alt="Instagram" className="mt-2 w-6/12 mb-4" />
+          </h1>
           {error && <p className="mb-4 text-xs text-red-primary text-center">{error}</p>}
 
           <form onSubmit={handleSignUp} method="POST">

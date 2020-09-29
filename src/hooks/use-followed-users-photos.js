@@ -1,12 +1,12 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import { getUserFollowing, getUserFollowedPhotos } from '../services/firebase';
-import useAuthListener from './use-auth-listener';
+import UserContext from '../context/user';
 
 export default function useFollowedUsersPhotos() {
   const [photos, setPhotos] = useState(null);
   const {
     user: { uid: userId = '' }
-  } = useAuthListener();
+  } = useContext(UserContext);
 
   useEffect(() => {
     async function getTimelinePhotos() {

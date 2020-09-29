@@ -6,9 +6,7 @@ import Actions from './actions';
 import Footer from './footer';
 import Comments from './comments';
 
-export default function Post({
-  content: { docId, username, imageSrc, caption, likes, userLikedPhoto, comments, dateCreated }
-}) {
+export default function Post({ content }) {
   const commentInput = useRef(null);
 
   function handleFocus() {
@@ -17,19 +15,19 @@ export default function Post({
 
   return (
     <div className="post rounded col-span-4 border bg-white border-gray-primary mb-16">
-      <Header username={username} />
-      <Image src={imageSrc} caption={caption} />
+      <Header username={content.username} />
+      <Image src={content.imageSrc} caption={content.caption} />
       <Actions
-        docId={docId}
-        totalLikes={likes.length}
-        likedPhoto={userLikedPhoto}
+        docId={content.docId}
+        totalLikes={content.likes.length}
+        likedPhoto={content.userLikedPhoto}
         handleFocus={handleFocus}
       />
-      <Footer username={username} caption={caption} />
+      <Footer username={content.username} caption={content.caption} />
       <Comments
-        docId={docId}
-        comments={comments}
-        posted={dateCreated}
+        docId={content.docId}
+        comments={content.comments}
+        posted={content.dateCreated}
         commentInput={commentInput}
       />
     </div>

@@ -1,10 +1,10 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { getUserByUserId } from '../services/firebase';
-import useAuthListener from './use-auth-listener';
+import UserContext from '../context/user';
 
 export default function useUser() {
   const [activeUser, setActiveUser] = useState({});
-  const { user } = useAuthListener();
+  const { user } = useContext(UserContext);
 
   useEffect(() => {
     async function getUserObjByUserId() {
