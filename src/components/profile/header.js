@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import Skeleton from 'react-loading-skeleton';
 import { useParams } from 'react-router-dom';
 import { isUserFollowingProfile, toggleFollow } from '../../services/firebase';
@@ -8,40 +9,29 @@ export default function Header({
   photosCount,
   followerCount: followers,
   setFollowerCount,
-  profile: { docId: profileDocId, userId, fullName, following },
+  profile: { docId: profileDocId, userId: profileUserId, fullName, following }
 }) {
   const { username: usernameFromUrl } = useParams();
   const { user } = useUser();
-  const [isFollowingProfile, setIsFollowingProfile] = useState(undefined);
-  const activeBtnFollowState =
-    user.username &&
-    user.username !== usernameFromUrl &&
-    isFollowingProfile !== undefined;
+  const [isFollowingProfile, setIsFollowingProfile] = useState(false);
+  const activeBtnFollowState = user.username && user.username !== usernameFromUrl;
 
   async function handleToggleFollow() {
-    // eslint-disable-next-line no-shadow
     setIsFollowingProfile((isFollowingProfile) => !isFollowingProfile);
-    setFollowerCount(isFollowingProfile ? followers - 1 : followers + 1);
-
-    await toggleFollow(
-      isFollowingProfile,
-      user.docId,
-      profileDocId,
-      userId,
-      user.userId
-    );
+    setFollowerCount({ followerCount: isFollowingProfile ? followers - 1 : followers + 1 });
+    await toggleFollow(isFollowingProfile, user.docId, profileDocId, profileUserId, user.userId);
   }
 
   useEffect(() => {
     async function isLoggedInUserFollowingProfile() {
-      const isFollowing = await isUserFollowingProfile(user.username, userId);
+      const isFollowing = await isUserFollowingProfile(user.username, profileUserId);
       setIsFollowingProfile(isFollowing);
     }
 
-    if (user.username && userId) {
+    if (user.username && profileUserId) {
       isLoggedInUserFollowingProfile();
     }
-  }, [user.username, userId]);
+  }, [user.username, profileUserId]);
 
   return (
     <div className="grid grid-cols-3 gap-4 justify-between mx-auto max-w-screen-lg">
@@ -84,11 +74,21 @@ export default function Header({
           )}
         </div>
         <div className="container mt-4">
-          <p className="font-medium">
-            {!fullName ? <Skeleton count={1} height={24} /> : fullName}
-          </p>
+          <p className="font-medium">{!fullName ? <Skeleton count={1} height={24} /> : fullName}</p>
         </div>
       </div>
     </div>
   );
 }
+
+Header.propTypes = {
+  photosCount: PropTypes.number,
+  followerCount: PropTypes.number,
+  setFollowerCount: PropTypes.func,
+  profile: PropTypes.shape({
+    docId: PropTypes.string,
+    userId: PropTypes.string,
+    fullName: PropTypes.string,
+    following: PropTypes.array
+  })
+};

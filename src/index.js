@@ -10,7 +10,7 @@ whyDidYouRender(React, {
   onlyLogs: true,
   titleColor: 'green',
   diffNameColor: 'aqua',
-  trackAllPureComponents: true,
+  trackAllPureComponents: true
 });
 
 ReactDOM.render(

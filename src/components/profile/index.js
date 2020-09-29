@@ -1,24 +1,24 @@
-import React, { useState, useEffect } from 'react';
+import React, { useReducer, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import Header from './header';
 import Photos from './photos';
-import {
-  getUserByUsername,
-  getUserPhotosByUsername,
-} from '../../services/firebase';
+import { getUserByUsername, getUserPhotosByUsername } from '../../services/firebase';
 
 export default function Profile({ username }) {
-  const [profile, setProfile] = useState({});
-  const [photosCollection, setPhotosCollection] = useState();
-  const [followerCount, setFollowerCount] = useState(0);
+  const [{ profile, photosCollection, followerCount }, dispatch] = useReducer(
+    (state, newState) => ({ ...state, ...newState }),
+    {
+      profile: {},
+      photosCollection: [],
+      followerCount: 0
+    }
+  );
 
   useEffect(() => {
     async function getProfileInfoAndPhotos() {
       const [{ ...user }] = await getUserByUsername(username);
       const photos = await getUserPhotosByUsername(username);
-
-      setProfile(user);
-      setPhotosCollection(photos);
-      setFollowerCount(user.followers.length);
+      dispatch({ profile: user, photosCollection: photos, followerCount: user.followers.length });
     }
     getProfileInfoAndPhotos();
   }, [username]);
@@ -26,12 +26,16 @@ export default function Profile({ username }) {
   return (
     <>
       <Header
-        photosCount={photosCollection?.length}
+        photosCount={photosCollection.length}
         profile={profile}
         followerCount={followerCount}
-        setFollowerCount={setFollowerCount}
+        setFollowerCount={dispatch}
       />
       <Photos photos={photosCollection} />
     </>
   );
 }
+
+Profile.propTypes = {
+  username: PropTypes.string.isRequired
+};

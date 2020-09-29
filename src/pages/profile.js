@@ -14,7 +14,7 @@ export default function Profile() {
     async function checkUserExistsToLoadProfile() {
       const doesUserExist = await getUserByUsername(username);
       if (!doesUserExist) {
-        history.push(ROUTES.HOME);
+        history.push(ROUTES.NOT_FOUND);
       } else {
         setUserExists(true);
       }

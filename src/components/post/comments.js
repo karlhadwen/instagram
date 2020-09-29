@@ -1,14 +1,10 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import { formatDistance } from 'date-fns';
 import { Link } from 'react-router-dom';
 import AddComment from './add-comment';
 
-export default function Comments({
-  docId,
-  comments: allComments,
-  posted,
-  commentInput,
-}) {
+export default function Comments({ docId, comments: allComments, posted, commentInput }) {
   const [comments, setComments] = useState(allComments);
 
   return (
@@ -40,3 +36,10 @@ export default function Comments({
     </>
   );
 }
+
+Comments.propTypes = {
+  docId: PropTypes.string.isRequired,
+  comments: PropTypes.array.isRequired,
+  posted: PropTypes.number.isRequired,
+  commentInput: PropTypes.object.isRequired
+};

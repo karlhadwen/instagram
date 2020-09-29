@@ -1,4 +1,5 @@
 import React, { useState, useContext } from 'react';
+import PropTypes from 'prop-types';
 import FirebaseContext from '../../context/firebase';
 import useAuthListener from '../../hooks/use-auth-listener';
 
@@ -6,10 +7,8 @@ export default function AddComment({ docId, comments, setComments, commentInput 
   const [comment, setComment] = useState('');
   const { firebase, FieldValue } = useContext(FirebaseContext);
   const {
-    user: { displayName },
+    user: { displayName }
   } = useAuthListener();
-
-  console.log('comment', comment);
 
   function handleSubmitComment(event) {
     event.preventDefault();
@@ -22,7 +21,7 @@ export default function AddComment({ docId, comments, setComments, commentInput 
       .collection('photos')
       .doc(docId)
       .update({
-        comments: FieldValue.arrayUnion({ displayName, comment }),
+        comments: FieldValue.arrayUnion({ displayName, comment })
       });
   }
 
@@ -30,7 +29,9 @@ export default function AddComment({ docId, comments, setComments, commentInput 
     <div className="post__add-comment border-t border-gray-primary">
       <form
         className="flex w-full justify-between pl-0 pr-5"
-        onSubmit={(event) => (comment.length > 1 ? handleSubmitComment(event) : event.preventDefault())}
+        onSubmit={(event) =>
+          comment.length > 1 ? handleSubmitComment(event) : event.preventDefault()
+        }
         method="POST"
       >
         <input
@@ -56,3 +57,10 @@ export default function AddComment({ docId, comments, setComments, commentInput 
     </div>
   );
 }
+
+AddComment.propTypes = {
+  docId: PropTypes.string,
+  comments: PropTypes.array,
+  setComments: PropTypes.func,
+  commentInput: PropTypes.object
+};

@@ -15,11 +15,7 @@ export default function Header() {
         <div className="flex justify-between h-full">
           <div className="text-gray-700 text-center flex items-center align-items cursor-pointer">
             <Link to={ROUTES.HOME} aria-label="Home">
-              <img
-                src="/images/logo.png"
-                alt="Instagram"
-                className="mt-2 w-6/12"
-              />
+              <img src="/images/logo.png" alt="Instagram" className="mt-2 w-6/12" />
             </Link>
           </div>
           <div className="text-gray-700 text-center flex items-center align-items">
@@ -46,6 +42,11 @@ export default function Header() {
                   type="button"
                   title="Sign Out"
                   onClick={() => firebase.auth().signOut()}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter') {
+                      firebase.auth().signOut();
+                    }
+                  }}
                 >
                   <svg
                     className="w-8 mr-6 text-black-light cursor-pointer"

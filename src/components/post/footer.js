@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 export default function Footer({ caption, username }) {
   return (
@@ -8,3 +9,8 @@ export default function Footer({ caption, username }) {
     </div>
   );
 }
+
+Footer.propTypes = {
+  caption: PropTypes.string.isRequired,
+  username: PropTypes.string.isRequired
+};

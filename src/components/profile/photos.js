@@ -1,5 +1,6 @@
 /* eslint-disable no-nested-ternary */
 import React from 'react';
+import PropTypes from 'prop-types';
 import Skeleton from 'react-loading-skeleton';
 
 export default function Photos({ photos }) {
@@ -55,10 +56,11 @@ export default function Photos({ photos }) {
         ) : null}
       </div>
 
-      {!photos ||
-        (photos.length === 0 && (
-          <p className="text-center text-2xl">No Posts Yet</p>
-        ))}
+      {!photos || (photos.length === 0 && <p className="text-center text-2xl">No Posts Yet</p>)}
     </div>
   );
 }
+
+Photos.propTypes = {
+  photos: PropTypes.array
+};

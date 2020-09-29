@@ -1,5 +1,6 @@
 /* eslint-disable no-nested-ternary */
 import React, { memo, useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import Skeleton from 'react-loading-skeleton';
 import SuggestedProfile from './suggested-profile';
 import { getSuggestedProfiles } from '../../services/firebase';
@@ -12,7 +13,9 @@ const Suggestions = ({ userId }) => {
       const response = await getSuggestedProfiles(userId);
       setProfiles(response);
     }
-    suggestedProfiles();
+    if (userId) {
+      suggestedProfiles();
+    }
   }, [userId]);
 
   return !profiles ? (
@@ -38,3 +41,7 @@ const Suggestions = ({ userId }) => {
 };
 
 export default memo(Suggestions);
+
+Suggestions.propTypes = {
+  userId: PropTypes.string
+};

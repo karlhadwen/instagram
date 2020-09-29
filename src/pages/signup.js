@@ -21,10 +21,12 @@ export default function SignUp() {
 
     if ((await doesUsernameExist(username)) === false) {
       try {
-        const createdUserResult = await firebase.auth().createUserWithEmailAndPassword(emailAddress, password);
+        const createdUserResult = await firebase
+          .auth()
+          .createUserWithEmailAndPassword(emailAddress, password);
 
         await createdUserResult.user.updateProfile({
-          displayName: username,
+          displayName: username
         });
 
         await firebase.firestore().collection('users').add({
@@ -33,7 +35,7 @@ export default function SignUp() {
           fullName,
           emailAddress: emailAddress.toLowerCase(),
           following: [],
-          dateCreated: Date.now(),
+          dateCreated: Date.now()
         });
 
         history.push(ROUTES.HOME);
@@ -95,7 +97,9 @@ export default function SignUp() {
             <button
               disabled={isInvalid}
               type="submit"
-              className={`bg-blue-medium text-white w-full rounded h-8 font-bold ${isInvalid && 'opacity-50'}`}
+              className={`bg-blue-medium text-white w-full rounded h-8 font-bold ${
+                isInvalid && 'opacity-50'
+              }`}
             >
               Sign Up
             </button>

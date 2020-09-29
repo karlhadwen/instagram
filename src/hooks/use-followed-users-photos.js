@@ -5,7 +5,7 @@ import useAuthListener from './use-auth-listener';
 export default function useFollowedUsersPhotos() {
   const [photos, setPhotos] = useState(null);
   const {
-    user: { uid: userId = '' },
+    user: { uid: userId = '' }
   } = useAuthListener();
 
   useEffect(() => {
@@ -14,10 +14,7 @@ export default function useFollowedUsersPhotos() {
       let followedUsersPhotos = [];
 
       if (followingUserIds.length > 0) {
-        followedUsersPhotos = await getUserFollowedPhotos(
-          userId,
-          followingUserIds
-        );
+        followedUsersPhotos = await getUserFollowedPhotos(userId, followingUserIds);
       }
 
       followedUsersPhotos.sort((a, b) => b.dateCreated - a.dateCreated);

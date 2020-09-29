@@ -7,12 +7,12 @@ export default function useUser() {
   const { user } = useAuthListener();
 
   useEffect(() => {
-    async function suggestedProfiles() {
+    async function getUserObjByUserId() {
       const [response] = await getUserByUserId(user.uid);
-      setActiveUser(response);
+      setActiveUser({ ...response });
     }
     if (user?.uid) {
-      suggestedProfiles();
+      getUserObjByUserId();
     }
   }, [user]);
 

@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import ProtectedRoute from './helpers/routes';
+import ProtectedRoute from './helpers/protected-route';
+import IsUserLoggedIn from './helpers/is-user-logged-in';
 import Home from './pages/home';
 import Login from './pages/login';
 import SignUp from './pages/signup';
@@ -15,12 +16,12 @@ export default function App() {
   return (
     <Router>
       <Switch>
-        <Route path={ROUTES.LOGIN}>
+        <IsUserLoggedIn user={user} loggedInPath={ROUTES.HOME} path={ROUTES.LOGIN}>
           <Login />
-        </Route>
-        <Route path={ROUTES.SIGN_UP}>
+        </IsUserLoggedIn>
+        <IsUserLoggedIn user={user} loggedInPath={ROUTES.HOME} path={ROUTES.SIGN_UP}>
           <SignUp />
-        </Route>
+        </IsUserLoggedIn>
         <Route path={ROUTES.PROFILE}>
           <Profile />
         </Route>
