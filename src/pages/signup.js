@@ -19,7 +19,8 @@ export default function SignUp() {
   const handleSignUp = async (event) => {
     event.preventDefault();
 
-    if ((await doesUsernameExist(username)) === false) {
+    const usernameExists = await doesUsernameExist(username);
+    if (usernameExists.length) {
       try {
         const createdUserResult = await firebase
           .auth()
@@ -38,7 +39,7 @@ export default function SignUp() {
           dateCreated: Date.now()
         });
 
-        history.push(ROUTES.HOME);
+        history.push(ROUTES.DASHBOARD);
       } catch (error) {
         setFullName('');
         setEmailAddress('');

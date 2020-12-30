@@ -3,9 +3,6 @@
   "version": "0.1.0",
   "author": "Karl Hadwen <karlhadwen@gmail.com> (https://youtube.com/c/cognitivesurge)",
   "dependencies": {
-    "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.3.2",
-    "@testing-library/user-event": "^7.1.2",
     "date-fns": "^2.16.1",
     "firebase": "^7.19.1",
     "react": "^16.13.1",
@@ -29,7 +26,10 @@
     "postcss-cli": "^7.1.1",
     "prettier": "^2.1.0",
     "prop-types": "^15.7.2",
-    "tailwindcss": "^1.7.3"
+    "tailwindcss": "^1.7.3",
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.3.2",
+    "@testing-library/user-event": "^7.1.2"
   },
   "scripts": {
     "build:css": "postcss src/styles/tailwind.css -o src/styles/app.css",
