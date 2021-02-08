@@ -1,24 +1,19 @@
 /* eslint-disable no-nested-ternary */
-import React from 'react';
 import Skeleton from 'react-loading-skeleton';
+import usePhotos from '../hooks/use-photos';
 import Post from './post';
-import useFollowedUsersPhotos from '../hooks/use-followed-users-photos';
 
 export default function Timeline() {
-  const { photos } = useFollowedUsersPhotos();
+  const { photos } = usePhotos();
 
   return (
     <div className="container col-span-2">
       {!photos ? (
-        <>
-          {[...new Array(9)].map((_, index) => (
-            <Skeleton key={index} count={1} width={320} height={400} />
-          ))}
-        </>
+        <Skeleton count={4} width={640} height={500} className="mb-5" />
       ) : photos?.length > 0 ? (
         photos.map((content) => <Post key={content.docId} content={content} />)
       ) : (
-        <p className="text-center text-2xl">Follow people to see posts!</p>
+        <p className="text-center text-2xl">Follow people to see photos!</p>
       )}
     </div>
   );

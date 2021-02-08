@@ -1,14 +1,15 @@
-import React, { lazy, Suspense } from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import ProtectedRoute from './helpers/protected-route';
-import IsUserLoggedIn from './helpers/is-user-logged-in';
+import { lazy, Suspense } from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import * as ROUTES from './constants/routes';
 import UserContext from './context/user';
 import useAuthListener from './hooks/use-auth-listener';
 
-const Dashboard = lazy(() => import('./pages/dashboard'));
+import ProtectedRoute from './helpers/protected-route';
+import IsUserLoggedIn from './helpers/is-user-logged-in';
+
 const Login = lazy(() => import('./pages/login'));
-const SignUp = lazy(() => import('./pages/signup'));
+const SignUp = lazy(() => import('./pages/sign-up'));
+const Dashboard = lazy(() => import('./pages/dashboard'));
 const Profile = lazy(() => import('./pages/profile'));
 const NotFound = lazy(() => import('./pages/not-found'));
 
@@ -17,8 +18,8 @@ export default function App() {
 
   return (
     <UserContext.Provider value={{ user }}>
-      <Suspense fallback={<p>Loading...</p>}>
-        <Router>
+      <Router>
+        <Suspense fallback={<p>Loading...</p>}>
           <Switch>
             <IsUserLoggedIn user={user} loggedInPath={ROUTES.DASHBOARD} path={ROUTES.LOGIN}>
               <Login />
@@ -26,16 +27,14 @@ export default function App() {
             <IsUserLoggedIn user={user} loggedInPath={ROUTES.DASHBOARD} path={ROUTES.SIGN_UP}>
               <SignUp />
             </IsUserLoggedIn>
-            <Route path={ROUTES.PROFILE}>
-              <Profile />
-            </Route>
+            <Route path={ROUTES.PROFILE} component={Profile} />
             <ProtectedRoute user={user} path={ROUTES.DASHBOARD} exact>
               <Dashboard />
             </ProtectedRoute>
             <Route component={NotFound} />
           </Switch>
-        </Router>
-      </Suspense>
+        </Suspense>
+      </Router>
     </UserContext.Provider>
   );
 }

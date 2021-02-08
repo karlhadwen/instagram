@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import PropTypes from 'prop-types';
 import { formatDistance } from 'date-fns';
 import { Link } from 'react-router-dom';
@@ -9,11 +9,9 @@ export default function Comments({ docId, comments: allComments, posted, comment
 
   return (
     <>
-      <div className="post__comments p-4 pt-1 pb-4">
+      <div className="p-4 pt-1 pb-4">
         {comments.length >= 3 && (
-          <p className="text-sm text-gray-base mb-1 cursor-pointer">
-            View all {comments.length} comments
-          </p>
+          <p className="text-sm text-gray-base mb-1 cursor-pointer">View all comments</p>
         )}
         {comments.slice(0, 3).map((item) => (
           <p key={`${item.comment}-${item.displayName}`} className="mb-1">

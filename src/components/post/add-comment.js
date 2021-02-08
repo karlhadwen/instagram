@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import { useState, useContext } from 'react';
 import PropTypes from 'prop-types';
 import FirebaseContext from '../../context/firebase';
 import UserContext from '../../context/user';
@@ -10,10 +10,10 @@ export default function AddComment({ docId, comments, setComments, commentInput 
     user: { displayName }
   } = useContext(UserContext);
 
-  function handleSubmitComment(event) {
+  const handleSubmitComment = (event) => {
     event.preventDefault();
 
-    setComments([{ displayName, comment }, ...comments]);
+    setComments([...comments, { displayName, comment }]);
     setComment('');
 
     return firebase
@@ -23,16 +23,16 @@ export default function AddComment({ docId, comments, setComments, commentInput 
       .update({
         comments: FieldValue.arrayUnion({ displayName, comment })
       });
-  }
+  };
 
   return (
-    <div className="post__add-comment border-t border-gray-primary">
+    <div className="border-t border-gray-primary">
       <form
-        className="flex w-full justify-between pl-0 pr-5"
-        onSubmit={(event) =>
-          comment.length > 1 ? handleSubmitComment(event) : event.preventDefault()
-        }
+        className="flex justify-between pl-0 pr-5"
         method="POST"
+        onSubmit={(event) =>
+          comment.length >= 1 ? handleSubmitComment(event) : event.preventDefault()
+        }
       >
         <input
           aria-label="Add a comment"
@@ -59,8 +59,8 @@ export default function AddComment({ docId, comments, setComments, commentInput 
 }
 
 AddComment.propTypes = {
-  docId: PropTypes.string,
-  comments: PropTypes.array,
-  setComments: PropTypes.func,
+  docId: PropTypes.string.isRequired,
+  comments: PropTypes.array.isRequired,
+  setComments: PropTypes.func.isRequired,
   commentInput: PropTypes.object
 };

@@ -1,4 +1,3 @@
-import React from 'react';
 import PropTypes from 'prop-types';
 import { Route, Redirect } from 'react-router-dom';
 
@@ -6,7 +5,7 @@ export default function IsUserLoggedIn({ user, loggedInPath, children, ...rest }
   return (
     <Route
       {...rest}
-      render={() => {
+      render={({ location }) => {
         if (!user) {
           return children;
         }
@@ -15,7 +14,8 @@ export default function IsUserLoggedIn({ user, loggedInPath, children, ...rest }
           return (
             <Redirect
               to={{
-                pathname: loggedInPath
+                pathname: loggedInPath,
+                state: { from: location }
               }}
             />
           );

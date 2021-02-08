@@ -1,17 +1,17 @@
-import React, { useReducer, useEffect } from 'react';
+import { useReducer, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Header from './header';
 import Photos from './photos';
-import { getUserByUsername, getUserPhotosByUsername } from '../../services/firebase';
+import { getUserPhotosByUsername } from '../../services/firebase';
 
-const reducer = (state, newState) => ({ ...state, ...newState });
-const initialState = {
-  profile: {},
-  photosCollection: [],
-  followerCount: 0
-};
+export default function Profile({ user }) {
+  const reducer = (state, newState) => ({ ...state, ...newState });
+  const initialState = {
+    profile: {},
+    photosCollection: [],
+    followerCount: 0
+  };
 
-export default function Profile({ username }) {
   const [{ profile, photosCollection, followerCount }, dispatch] = useReducer(
     reducer,
     initialState
@@ -19,17 +19,16 @@ export default function Profile({ username }) {
 
   useEffect(() => {
     async function getProfileInfoAndPhotos() {
-      const [{ ...user }] = await getUserByUsername(username);
-      const photos = await getUserPhotosByUsername(username);
+      const photos = await getUserPhotosByUsername(user.username);
       dispatch({ profile: user, photosCollection: photos, followerCount: user.followers.length });
     }
     getProfileInfoAndPhotos();
-  }, [username]);
+  }, [user.username]);
 
   return (
     <>
       <Header
-        photosCount={photosCollection.length}
+        photosCount={photosCollection ? photosCollection.length : 0}
         profile={profile}
         followerCount={followerCount}
         setFollowerCount={dispatch}
@@ -40,5 +39,13 @@ export default function Profile({ username }) {
 }
 
 Profile.propTypes = {
-  username: PropTypes.string.isRequired
+  user: PropTypes.shape({
+    dateCreated: PropTypes.number,
+    emailAddress: PropTypes.string,
+    followers: PropTypes.array,
+    following: PropTypes.array,
+    fullName: PropTypes.string,
+    userId: PropTypes.string,
+    username: PropTypes.string
+  })
 };
