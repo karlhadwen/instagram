@@ -1,6 +1,6 @@
-## Building Instagram from Scratch Using React (Custom Hooks, Context), Tailwind CSS, Firebase (11+ Hour Tutorial Here: )
+## Building Instagram from Scratch Using React, Tailwind CSS, Firebase (11+ Hour Tutorial Here: https://youtu.be/AKeaaa8yAAk)
 
-Extended paid version here (3 hours 30 mins extra): https://gum.co/react-instagram-clone
+💰 Extended paid version here (3 hours 30 mins extra): https://gum.co/react-instagram-clone
 
 ## 📣 Summary
 
@@ -8,7 +8,7 @@ This application (Instagram clone) was built using React (Custom Hooks, Context)
 
 I used Tailwind CSS for this project and I really enjoyed using it. I used styled components in my previous project, but I have now converted all my projects to Tailwind CSS for ease of use. This will be my last project using Firebase as it's far too complex to use and far too complex to test (especially with Cypress). With Jest, it's also tedious to test Firebase as there's no great mocking library, so you end up just repeating yourself in the tests a lot.
 
-## 💷  Instagram Clone Extended Videos - Tailwind CSS Responsive, React Testing Library & Cypress Tests
+## 💷  Extended Videos - Tailwind CSS Responsive, React Testing Library & Cypress Tests
 
 If you're interested in the paid version of this course which includes making this application responsive and testing via React Testing Library and Cypress, you can find that here: https://gum.co/react-instagram-clone - a purchase shows your appreciation and allows me to spend more time making videos 🙌
 
