@@ -3,7 +3,6 @@ module.exports = {
     removeDeprecatedGapUtilities: true
   },
   purge: {
-    enabled: true,
     content: ['./src/**/*.js', './src/**/**/*.js']
   },
   theme: {
@@ -30,6 +29,8 @@ module.exports = {
     }
   },
   variants: {
-    display: ['group-hover']
+    extend: {
+      display: ['group-hover']
+    }
   }
 };
