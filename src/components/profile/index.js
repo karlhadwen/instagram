@@ -8,7 +8,7 @@ export default function Profile({ user }) {
   const reducer = (state, newState) => ({ ...state, ...newState });
   const initialState = {
     profile: {},
-    photosCollection: [],
+    photosCollection: null,
     followerCount: 0
   };
 
