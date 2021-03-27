@@ -63,7 +63,7 @@ export default function Header({
       <div className="flex items-center justify-center flex-col col-span-2">
         <div className="container flex items-center">
           <p className="text-2xl mr-4">{profileUsername}</p>
-          {user?.username && user?.username !== profileUsername && isFollowingProfile === null ? (
+          {activeBtnFollow && isFollowingProfile === null ? (
             <Skeleton count={1} width={80} height={32} />
           ) : (
             activeBtnFollow && (
