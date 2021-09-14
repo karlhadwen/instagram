@@ -4,7 +4,7 @@ export async function doesUsernameExist(username) {
   const result = await firebase
     .firestore()
     .collection('users')
-    .where('username', '==', username)
+    .where('username', '==', username.toLowerCase())
     .get();
 
   return result.docs.length > 0;
@@ -14,7 +14,7 @@ export async function getUserByUsername(username) {
   const result = await firebase
     .firestore()
     .collection('users')
-    .where('username', '==', username)
+    .where('username', '==', username.toLowerCase())
     .get();
 
   return result.docs.map((item) => ({
@@ -63,9 +63,9 @@ export async function updateLoggedInUserFollowing(
     .collection('users')
     .doc(loggedInUserDocId)
     .update({
-      following: isFollowingProfile
-        ? FieldValue.arrayRemove(profileId)
-        : FieldValue.arrayUnion(profileId)
+      following: isFollowingProfile ?
+        FieldValue.arrayRemove(profileId) :
+        FieldValue.arrayUnion(profileId)
     });
 }
 
@@ -79,9 +79,9 @@ export async function updateFollowedUserFollowers(
     .collection('users')
     .doc(profileDocId)
     .update({
-      followers: isFollowingProfile
-        ? FieldValue.arrayRemove(loggedInUserDocId)
-        : FieldValue.arrayUnion(loggedInUserDocId)
+      followers: isFollowingProfile ?
+        FieldValue.arrayRemove(loggedInUserDocId) :
+        FieldValue.arrayUnion(loggedInUserDocId)
     });
 }
 
